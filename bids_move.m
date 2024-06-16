@@ -1,11 +1,11 @@
-function bids_move(folder_path_root, folder_path_dicom)
+function bids_move(folder_path_root, folder_path_dicom, folder_path_code)
 
 % move converted .nii into existing folder structure and rename
 % according to BIDS
 % Paul Schmitthäuser (03.06.2024)
 
 
-folder_path_code = fullfile(folder_path_root, 'code');
+%folder_path_code = fullfile(folder_path_root, 'code');
 folder_path_sourcedata = fullfile(folder_path_root, 'sourcedata');
 
 
@@ -18,9 +18,11 @@ load(fullfile(folder_path_code, 'exp_var.mat'));
 key = [];
 key{1}.id = sub_all(1);
 key{1}.ses = ses_all(1,:);
-key{1}.run = run_all(1,:);
-key{1}.source = {'s005.nii', 's008.nii', 's011.nii', 's014.nii', 's017.nii', 's019.nii', 's021.nii'};
-key{1}.log = {'run-01', 'run-02', 'run-03', 'run-04', 'run-05', 'run-06', 'localizer1'};
+%key{1}.run = run_all(1,:);
+key{1}.run = [run_all(1,:), '008'];
+%key{1}.source = {'s005.nii', 's008.nii', 's011.nii', 's014.nii', 's017.nii', 's019.nii', 's021.nii'}
+key{1}.source = {'s005.nii', 's008.nii', 's011.nii', 's014.nii', 's017.nii', 's019.nii', 's021.nii', 's023.nii'};
+key{1}.log = {'run-01', 'run-02', 'run-03', 'run-04', 'run-05', 'run-06', 'localizer1', 'localizer2'};
 
 key{2}.id = sub_all(2);
 key{2}.ses = ses_all(2,:);
@@ -105,7 +107,7 @@ for i=1:numel(file_base_sourcedata)
             % adding run- (here, we have to match from the key
 
             matched_idx = strcmp(str_elem(end), key{s}.source);
-
+            
             if any(matched_idx)
                 matched_run = key{s}.run(matched_idx);
                 file_base_bids = [file_base_bids, '_run-', matched_run{:}];
@@ -135,10 +137,10 @@ for i=1:numel(file_base_sourcedata)
 
 end % loop elements in sourcedata
 
-
 for i=1:numel(file_base_log)
     file_base_bids = ['sub-', key{s}.id{:}];
     str_elem = strsplit(file_base_log(i).name, '_');
+    %disp(file_base_log{i}.name);
     
     if strcmp(str_elem{1}, 'log')
         
