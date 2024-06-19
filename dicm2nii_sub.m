@@ -1,6 +1,6 @@
-function dicom2nii_sub(folder_path_root, folder_path_dicom)
+function dicom2nii_sub(folder_path_root, folder_path_dicom, folder_path_code)
 
-folder_path_code = fullfile(folder_path_root, 'code');
+%folder_path_code = fullfile(folder_path_root, 'code');
 folder_path_sourcedata = fullfile(folder_path_root, 'sourcedata');
 
 load(fullfile(folder_path_code, 'exp_var.mat'));

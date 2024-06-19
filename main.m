@@ -13,7 +13,7 @@ addpath(genpath(folder_path_code_setup));
 bids_create(folder_path_root)
 
 % convert dicom to nii and place into sourcedata
-dicm2nii_sub(folder_path_root, folder_path_dicom)
+dicm2nii_sub(folder_path_root, folder_path_dicom, folder_path_code)
 
 % rename and move
 bids_move(folder_path_root, folder_path_dicom, folder_path_code)
