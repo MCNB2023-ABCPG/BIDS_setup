@@ -163,5 +163,9 @@ end
 
 end % loop ses
 end % loop sub
+
+% move BTAPE-info folder
+movefile(fullfile(folder_path_dicom, 'BTAPE_info'), fullfile(folder_path_root, 'derivatives'))
+
 end % function
 
